@@ -5,7 +5,7 @@ import { extToLoader } from '../utils';
 import { fetchPkg } from './http';
 import { SASS_REGEXP, SassNamespace, SASS_PLUGIN_NAME, loadSass } from './sass';
 export const UnpkgNamepsace = 'unpkg';
-export const UnpkgHost = 'https://unpkg.alibaba-inc.com/';
+export const UnpkgHost = 'https://unpkg.com/';
 const cache: Record<string, Awaited<ReturnType<typeof fetchPkg>>> = {};
 
 export const pluginUnpkg = (context: Compiler): Plugin => {
