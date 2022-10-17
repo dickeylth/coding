@@ -1,0 +1,12 @@
+{
+  "name": "browser-dart-sass",
+  "version": "1.36.0",
+  "description": "Browserified version of dart-sass, from https://github.com/codesandbox/codesandbox-client/blob/master/packages/browser-dart-sass",
+  "main": "./lib/index.js",
+  "files": ["lib"],
+  "license": "MIT",
+  "scripts": {
+    "build": "node index.js",
+    "build:dev": "yarn build"
+  }
+}

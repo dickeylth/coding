@@ -1,0 +1,1 @@
+import{c as n,j as e,a as r}from"./jsx-runtime.37c4a5a8.js";const i=()=>r("ul",{children:[e("li",{children:e("a",{href:"/mvp/",children:"Online Bundler MVP"})}),e("li",{children:e("a",{href:"/ide/",children:"Online IDE"})})]});n.createRoot(document.getElementById("root")).render(e(i,{}));

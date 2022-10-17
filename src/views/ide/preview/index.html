@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Preview</title>
+  </head>
+  <body>
+    <div id="root">loading....</div>
+    <script>
+      window.addEventListener('message', (e) => {
+        const { compileResult } = e.data;
+        if (compileResult) {
+          Object.keys(compileResult).forEach(function(file) {
+            if (/\.js$/.test(file)) {
+              eval(compileResult[file])
+            } else if (/\.css$/.test(file)) {
+              const style = document.createElement('style');
+              style.textContent = compileResult[file];
+              document.head.appendChild(style);
+            }
+          })
+        }
+      });
+    </script>
+  </body>
+</html>

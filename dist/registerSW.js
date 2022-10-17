@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/edith-eco/coding-app/sw.js', { scope: '/edith-eco/coding-app/' })})}
