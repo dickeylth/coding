@@ -6,7 +6,7 @@
 import Dexie from 'dexie';
 import { message } from 'antd';
 import { languages } from 'monaco-editor';
-import request from '@/utils/request';
+import { corsRequest } from '@/utils/request';
 
 // 最多缓存 7 天
 const CACHE_TIME = 7 * 24 * 60 * 60 * 1000;
@@ -102,13 +102,13 @@ const syncPkgDefinitions = async (
 ) => {
   try {
     const pkgId = [pkgName, pkgVersion].filter(Boolean).join('/');
-    const checkTypeResult = await request(
+    const checkTypeResult = await corsRequest(
       `https://unpkg.com/${tsPkgName}/?meta`);
     if (checkTypeResult.files) {
       const definitionFiles = recursiveParseFile(checkTypeResult.files);
       let definitions: ITypeDefinition['definitions'] = [];
       if (definitionFiles.length > MAX_DEFINITION_FILE_COUNT) {
-        const definitionResult = await request(
+        const definitionResult = await corsRequest(
           `/api/playground/definition`, {
           params: {
             pkgName: tsPkgName,
@@ -121,7 +121,7 @@ const syncPkgDefinitions = async (
       } else {
         definitions = await Promise.all(
           definitionFiles.map(async (filePath: string) => {
-            const fileContent = await request(`https://unpkg.com/${tsPkgName}${filePath}`);
+            const fileContent = await corsRequest(`https://unpkg.com/${tsPkgName}${filePath}`);
             return {
               path: filePath,
               content: fileContent,
@@ -131,7 +131,7 @@ const syncPkgDefinitions = async (
       if (definitions.length === 0) { return null; }
       if (!definitions.some(i => /^\.?\/?index\.d\.ts$/.test(i.path))) {
         try {
-          const pkgJsonResult = await request([
+          const pkgJsonResult = await corsRequest([
             `https://unpkg.com/${pkgName}`,
             pkgVersion,
             'package.json'
@@ -150,7 +150,7 @@ const syncPkgDefinitions = async (
                 typingDir = `/${checkLibEsTypesResult.path.split('/').slice(0, -1).join('/').replace(/^(\.?)\//, '')}`;
               } else {
                 // 没有找到 typings 入口，埋个点
-                request(
+                corsRequest(
                   `/api/playground/definition`, {
                   params: {
                     pkgName: tsPkgName,
@@ -279,7 +279,7 @@ export default async (code: string) => {
           if (/^@types\//.test(tsPkgName)) {
             // 需要探测一下 @types 包是否存在，如果不存在，需要回退到本包
             try {
-              await request(`https://unpkg.com/${tsPkgName}/package.json`, {
+              await corsRequest(`https://unpkg.com/${tsPkgName}/package.json`, {
                 method: 'HEAD',
                 errorHandler: (res => {
                   if (res.response.status === 404) {
