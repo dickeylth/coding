@@ -42,7 +42,8 @@ export default defineConfig(({ command }) => ({
       path: 'path-browserify',
       stream: "stream-browserify",
       zlib: "browserify-zlib",
-      util: 'util'
+      util: 'util',
+      buffer: 'buffer/',
     }
   },
   optimizeDeps: {

@@ -1,4 +1,4 @@
-import{m as l}from"./ide.7609df42.js";import"./jsx-runtime.37c4a5a8.js";import"./index.823c1cbf.js";import"./editorWorker.4c4a20e7.js";/*!-----------------------------------------------------------------------------
+import{m as l}from"./ide.04039bf1.js";import"./jsx-runtime.37c4a5a8.js";import"./index.1590b4b0.js";import"./editorWorker.4c4a20e7.js";/*!-----------------------------------------------------------------------------
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Version: 0.34.0(9d278685b078158491964f8fd7ac9628fffa0f30)
  * Released under the MIT license
