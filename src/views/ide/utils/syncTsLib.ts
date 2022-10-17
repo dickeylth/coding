@@ -103,7 +103,7 @@ const syncPkgDefinitions = async (
   try {
     const pkgId = [pkgName, pkgVersion].filter(Boolean).join('/');
     const checkTypeResult = await request(
-      `https://unpkg.com/meta/${tsPkgName}/`);
+      `https://unpkg.com/${tsPkgName}/?meta`);
     if (checkTypeResult.files) {
       const definitionFiles = recursiveParseFile(checkTypeResult.files);
       let definitions: ITypeDefinition['definitions'] = [];
