@@ -12,7 +12,6 @@ import { pluginUnpkg } from './plugins/unpkg';
 import path from 'path';
 import fs from 'fs';
 import { pluginEntry } from './plugins/entry';
-// import { sassPlugin } from 'esbuild-sass-plugin';
 import { pluginSass } from './plugins/sass';
 
 // import { pluginGlobalExternal } from '../plugins/external-global';

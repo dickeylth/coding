@@ -100,8 +100,8 @@ export default defineConfig(({ command }) => ({
     tsconfigPaths(),
     VitePWA({
       registerType: 'autoUpdate',
-      base: '/edith-eco/coding-app/',
-      scope: '/edith-eco/coding-app/',
+      base: '/',
+      scope: '/',
       workbox: {
         // 默认只缓存 2M，提高到 20M
         maximumFileSizeToCacheInBytes: 1024 * 1024 * 20,
