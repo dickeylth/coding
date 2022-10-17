@@ -9,7 +9,7 @@ import esbuild from 'esbuild-wasm/esm/browser';
 
 const esbuildInitPromise = esbuild.initialize({
   wasmURL: process.env.NODE_ENV === 'production' ?
-    `https://unpkg.alibaba-inc.com/esbuild-wasm@${version}/esbuild.wasm` :
+    `https://unpkg.com/esbuild-wasm@${version}/esbuild.wasm` :
     '/node_modules/esbuild-wasm/esbuild.wasm',
 });
 
@@ -17,11 +17,6 @@ const esbuildInitPromise = esbuild.initialize({
 const getService = async (): Promise<PluginBuild['esbuild']> => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   // const esbuild = await import('esbuild-wasm/esm/browser');
-
-  // const service = await esbuild.startService({
-  //   worker: true,
-  //   wasmURL: `https://unpkg.alibaba-inc.com/esbuild-wasm@${version}/esbuild.wasm`,
-  // });
   await esbuildInitPromise;
   return esbuild;
 };

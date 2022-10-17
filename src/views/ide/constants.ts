@@ -44,7 +44,7 @@ export default () => {
       <Image source={{
         width: 64,
         height: 64,
-        uri: 'https://g01.alibaba-inc.com/imgextra/i2/O1CN01p8PdZw1XiLokWMlB1_!!6000000002957-2-tps-64-64.png'
+        uri: ''
       }} />
     </View>
   );

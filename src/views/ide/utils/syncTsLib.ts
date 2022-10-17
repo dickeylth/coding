@@ -103,7 +103,7 @@ const syncPkgDefinitions = async (
   try {
     const pkgId = [pkgName, pkgVersion].filter(Boolean).join('/');
     const checkTypeResult = await request(
-      `https://unpkg.alibaba-inc.com/meta/${tsPkgName}/`);
+      `https://unpkg.com/meta/${tsPkgName}/`);
     if (checkTypeResult.files) {
       const definitionFiles = recursiveParseFile(checkTypeResult.files);
       let definitions: ITypeDefinition['definitions'] = [];
@@ -121,7 +121,7 @@ const syncPkgDefinitions = async (
       } else {
         definitions = await Promise.all(
           definitionFiles.map(async (filePath: string) => {
-            const fileContent = await request(`https://unpkg.alibaba-inc.com/${tsPkgName}${filePath}`);
+            const fileContent = await request(`https://unpkg.com/${tsPkgName}${filePath}`);
             return {
               path: filePath,
               content: fileContent,
@@ -132,7 +132,7 @@ const syncPkgDefinitions = async (
       if (!definitions.some(i => /^\.?\/?index\.d\.ts$/.test(i.path))) {
         try {
           const pkgJsonResult = await request([
-            `https://unpkg.alibaba-inc.com/${pkgName}`,
+            `https://unpkg.com/${pkgName}`,
             pkgVersion,
             'package.json'
           ].filter(Boolean).join('/'));
@@ -279,7 +279,7 @@ export default async (code: string) => {
           if (/^@types\//.test(tsPkgName)) {
             // 需要探测一下 @types 包是否存在，如果不存在，需要回退到本包
             try {
-              await request(`https://unpkg.alibaba-inc.com/${tsPkgName}/package.json`, {
+              await request(`https://unpkg.com/${tsPkgName}/package.json`, {
                 method: 'HEAD',
                 errorHandler: (res => {
                   if (res.response.status === 404) {
